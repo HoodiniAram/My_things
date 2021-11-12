@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include "gtest/gtest.h"
-
+using namespace std;
 int main(int argc, char *argv[])
 {
     DIR *dir;
