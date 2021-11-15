@@ -1,15 +1,38 @@
 #include <stdio.h>
+#include <fstream>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <dirent.h>
-#include "gtest/gtest.h"
+#include <iostream>
+//#include <gtest/gtest.h>
 using namespace std;
+int linecounter(string filen)
+{
+    int numberlines=0;
+    string line;
+    ifstream myfile(filen);
+    
+    while (getline(myfile, line))
+        {++numberlines;}
+
+    myfile.close();
+    
+    return numberlines;
+}
 int main(int argc, char *argv[])
 {
+    int numberoffile=0, numberoflines=0;
+    string file;
     DIR *dir;
     struct dirent *sd;
-    dir-opendir(".");
-    
+    dir=opendir(".");
+    /*
+        unfortunately i don't know how to use Gtest
+    TEST(TestDirrectory, Test1)
+    {
+        EXPECT_EQ(NULL)
+    }
+    */
     if (dir == NULL)
     {
         printf("Err!");
@@ -18,10 +41,13 @@ int main(int argc, char *argv[])
     
     while ( ( sd=readdir(dir)) !=NULL )
     {
-        printf(">> %s\n", sd->d_name);
+        file.clear();
+        numberoffile++;
+        file=sd->d_name;
+        numberoflines=numberoflines+linecounter(file);
     }
     
     closedir(dir);
-    
+    cout<<"number of files "<<numberoffile<<"\n number of lines: "<<numberoflines;
     return 0;  
 }
